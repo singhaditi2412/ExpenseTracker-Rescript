@@ -1,0 +1,34 @@
+rescript = 1
+rule cp
+  command = cp $i $out
+rule touch
+ command = touch $out
+o App.cmi : cp ../bs/src/App.cmi
+o App.cmj : cp ../bs/src/App.cmj
+o App.cmt : cp ../bs/src/App.cmt
+o App.res : cp ../../src/App.res
+o TotalBalance.cmi : cp ../bs/src/components/TotalBalance/TotalBalance.cmi
+o TotalBalance.cmj : cp ../bs/src/components/TotalBalance/TotalBalance.cmj
+o TotalBalance.cmt : cp ../bs/src/components/TotalBalance/TotalBalance.cmt
+o TotalBalance.res : cp ../../src/components/TotalBalance/TotalBalance.res
+o NewTransaction.cmi : cp ../bs/src/components/NewTransaction/NewTransaction.cmi
+o NewTransaction.cmj : cp ../bs/src/components/NewTransaction/NewTransaction.cmj
+o NewTransaction.cmt : cp ../bs/src/components/NewTransaction/NewTransaction.cmt
+o NewTransaction.res : cp ../../src/components/NewTransaction/NewTransaction.res
+o History.cmi : cp ../bs/src/components/History/History.cmi
+o History.cmj : cp ../bs/src/components/History/History.cmj
+o History.cmt : cp ../bs/src/components/History/History.cmt
+o History.res : cp ../../src/components/History/History.res
+o HistoryList.cmi : cp ../bs/src/components/History/HistoryList.cmi
+o HistoryList.cmj : cp ../bs/src/components/History/HistoryList.cmj
+o HistoryList.cmt : cp ../bs/src/components/History/HistoryList.cmt
+o HistoryList.res : cp ../../src/components/History/HistoryList.res
+o IncomeExpenseForm.cmi : cp ../bs/src/components/IncomeExpenseForm/IncomeExpenseForm.cmi
+o IncomeExpenseForm.cmj : cp ../bs/src/components/IncomeExpenseForm/IncomeExpenseForm.cmj
+o IncomeExpenseForm.cmt : cp ../bs/src/components/IncomeExpenseForm/IncomeExpenseForm.cmt
+o IncomeExpenseForm.res : cp ../../src/components/IncomeExpenseForm/IncomeExpenseForm.res
+o GlobalContext.cmi : cp ../bs/src/context/GlobalContext.cmi
+o GlobalContext.cmj : cp ../bs/src/context/GlobalContext.cmj
+o GlobalContext.cmt : cp ../bs/src/context/GlobalContext.cmt
+o GlobalContext.res : cp ../../src/context/GlobalContext.res
+build install.stamp : touch App.cmi App.cmj TotalBalance.cmi TotalBalance.cmj NewTransaction.cmi NewTransaction.cmj History.cmi History.cmj HistoryList.cmi HistoryList.cmj IncomeExpenseForm.cmi IncomeExpenseForm.cmj GlobalContext.cmi GlobalContext.cmj 
