@@ -1,11 +1,10 @@
-7
+6
 App
-History
 HistoryList
 TotalBalance
 GlobalContext
 NewTransaction
 IncomeExpenseForm
 src	src/components/History	src/components/TotalBalance	src/context	src/components/NewTransaction	src/components/IncomeExpenseForm	
-1	
+1	
 0

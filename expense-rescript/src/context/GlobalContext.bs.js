@@ -5,8 +5,10 @@ import * as React from "react";
 
 var state = [];
 
+var saveTransactions = sessionStorage.getItem("saveTransactions");
+
 var context = React.createContext({
-      transactions: [],
+      transactions: saveTransactions !== null ? JSON.parse(saveTransactions) : [],
       addTransactionHandler: (function (param) {
           
         })
@@ -32,7 +34,10 @@ var ExpenseTrackerContext = {
 };
 
 function reducer(state, action) {
-  return state.concat([action._0]);
+  var transaction = action._0;
+  var v = JSON.stringify(state.concat([transaction]));
+  sessionStorage.setItem("saveTransactions", v !== undefined ? v : "");
+  return state.concat([transaction]);
 }
 
 function GlobalContext(Props) {

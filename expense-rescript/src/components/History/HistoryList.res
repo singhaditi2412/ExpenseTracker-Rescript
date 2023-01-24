@@ -11,11 +11,16 @@ let make = () => {
       <ul className="history-list">
         {transactions
         ->Belt.Array.map(transaction => {
-          <li key={Belt.Int.toString(transaction.id)}> {React.string(transaction.text)} </li>
+          <li key={Belt.Int.toString(transaction.id)}>
+            <p> {React.string(transaction.text)} </p>
+            <p>
+              {React.string("$")}
+              {transaction.price->Belt.Int.toString->React.string}
+            </p>
+          </li>
         })
         ->React.array}
       </ul>
     </div>
   </div>
 }
-//   {transactions.map(transaction => <History key={transaction.id} transaction={transaction} />)}

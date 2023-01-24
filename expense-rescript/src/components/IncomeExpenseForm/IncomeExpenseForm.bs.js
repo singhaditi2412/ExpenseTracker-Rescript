@@ -17,7 +17,7 @@ function IncomeExpenseForm(Props) {
             return acc + 0 | 0;
           }
         }));
-  var income$1 = String(income);
+  var finalIncome = String(income);
   var expense = Belt_Array.reduce(transactions, 0, (function (acc, value) {
           if (value.price < 0) {
             return acc + value.price | 0;
@@ -25,10 +25,7 @@ function IncomeExpenseForm(Props) {
             return acc + 0 | 0;
           }
         }));
-  console.log(income$1);
-  var expense$1 = Math.imul(-1, expense);
-  var expense$2 = String(expense$1);
-  console.log(expense$2);
+  var finalExpense = String(expense);
   return React.createElement("div", {
               className: "income-expense-form"
             }, React.createElement("div", {
@@ -37,7 +34,7 @@ function IncomeExpenseForm(Props) {
                       className: "income-expense-title"
                     }, "INCOME"), React.createElement("p", {
                       className: "income-money"
-                    }, income$1)), React.createElement("div", {
+                    }, finalIncome)), React.createElement("div", {
                   className: "middle-border"
                 }), React.createElement("div", {
                   className: "expense"
@@ -45,7 +42,7 @@ function IncomeExpenseForm(Props) {
                       className: "income-expense-title"
                     }, "EXPENSE"), React.createElement("p", {
                       className: "expense-money"
-                    }, expense$2)));
+                    }, finalExpense)));
 }
 
 var make = IncomeExpenseForm;

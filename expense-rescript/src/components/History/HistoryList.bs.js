@@ -18,7 +18,7 @@ function HistoryList(Props) {
                     }, Belt_Array.map(match.transactions, (function (transaction) {
                             return React.createElement("li", {
                                         key: String(transaction.id)
-                                      }, transaction.text);
+                                      }, React.createElement("p", undefined, transaction.text), React.createElement("p", undefined, "$", String(transaction.price)));
                           })))));
 }
 

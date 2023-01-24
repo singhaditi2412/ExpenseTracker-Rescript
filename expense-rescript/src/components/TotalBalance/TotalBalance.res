@@ -7,6 +7,9 @@ let make = () => {
   )
   <div className="total-balance">
     <h3> {"YOUR BALANCE"->React.string} </h3>
-      <h1> {React.string("$")}{{total}->Belt.Int.toString->React.string} </h1>
+    <h1>
+      {React.string("$")}
+      {{total}->Belt.Int.toString->React.string}
+    </h1>
   </div>
 }

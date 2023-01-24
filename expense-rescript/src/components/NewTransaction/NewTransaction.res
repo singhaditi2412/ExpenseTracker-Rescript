@@ -2,19 +2,29 @@
 @react.component
 let make = () => {
   let (text, setText) = React.useState(_ => "")
-  let (price, setPrice) = React.useState(_ => 0)
+  let (price, setPrice) = React.useState(_ => "")
   let (id, setId) = React.Uncurried.useState(_ => 1)
+  let (error, setError) = React.useState(_ => false)
   let {addTransactionHandler} = React.useContext(GlobalContext.context)
 
   let onSubmit = e => {
     ReactEvent.Form.preventDefault(e)
-    setId(.prev => prev+1)
+    if text == "" && price == "" {
+      setError(_ => true)
+    }
+    setError(_ => false)
+    setId(.prev => prev + 1)
+    let price = Belt.Int.fromString(price)
+    let price = switch price {
+    | None => 0.
+    | Some(v) => Belt.Int.toFloat(v)
+    }
     addTransactionHandler({
-      id: id,
-      text: text,
-      price: price
+      id,
+      text,
+      price: Belt.Float.toInt(price),
     })
-    setPrice(_ => 0)
+    setPrice(_ => "")
     setText(_ => "")
   }
   <div className="new-transaction">
@@ -33,19 +43,24 @@ let make = () => {
         }}
         placeholder="Enter text..."
       />
+      {error && text <= Belt.Int.toString(0)
+        ? <div className="error-label"> {React.string("Enter text")} </div>
+        : {React.string("")}}
       <label> {React.string("Amount")} </label>
       <label> {React.string("negative - expense, positive - income")} </label>
       <input
-        type_= "number"
-        value={Belt.Int.toString(price)}
+        type_="number"
+        value={price}
         onChange={e => {
           let updatedPrice = ReactEvent.Form.target(e)["value"]
-          setPrice(_ => updatedPrice)
+          setPrice(updatedPrice)
         }}
         placeholder="Enter amount..."
       />
+      {error && price <= Belt.Int.toString(0)
+        ? <div className="error-label"> {React.string("Enter amount")} </div>
+        : {React.string("")}}
       <button type_="submit"> {React.string("Add transaction")} </button>
-      
     </form>
   </div>
 }

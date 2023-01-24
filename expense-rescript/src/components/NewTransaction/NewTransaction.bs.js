@@ -2,6 +2,7 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
+import * as Belt_Int from "rescript/lib/es6/belt_Int.js";
 import * as GlobalContext from "../../context/GlobalContext.bs.js";
 
 import './NewTransaction.css'
@@ -14,7 +15,7 @@ function NewTransaction(Props) {
   var setText = match[1];
   var text = match[0];
   var match$1 = React.useState(function () {
-        return 0;
+        return "";
       });
   var setPrice = match$1[1];
   var price = match$1[0];
@@ -23,20 +24,35 @@ function NewTransaction(Props) {
       });
   var setId = match$2[1];
   var id = match$2[0];
-  var match$3 = React.useContext(GlobalContext.context);
-  var addTransactionHandler = match$3.addTransactionHandler;
+  var match$3 = React.useState(function () {
+        return false;
+      });
+  var setError = match$3[1];
+  var error = match$3[0];
+  var match$4 = React.useContext(GlobalContext.context);
+  var addTransactionHandler = match$4.addTransactionHandler;
   var onSubmit = function (e) {
     e.preventDefault();
+    if (text === "" && price === "") {
+      Curry._1(setError, (function (param) {
+              return true;
+            }));
+    }
+    Curry._1(setError, (function (param) {
+            return false;
+          }));
     setId(function (prev) {
           return prev + 1 | 0;
         });
+    var price$1 = Belt_Int.fromString(price);
+    var price$2 = price$1 !== undefined ? price$1 : 0;
     Curry._1(addTransactionHandler, {
           id: id,
           text: text,
-          price: price
+          price: price$2 | 0
         });
     Curry._1(setPrice, (function (param) {
-            return 0;
+            return "";
           }));
     Curry._1(setText, (function (param) {
             return "";
@@ -56,17 +72,18 @@ function NewTransaction(Props) {
                                   return updatedTransactionText;
                                 }));
                         })
-                    }), React.createElement("label", undefined, "Amount"), React.createElement("label", undefined, "negative - expense, positive - income"), React.createElement("input", {
+                    }), error && text <= String(0) ? React.createElement("div", {
+                        className: "error-label"
+                      }, "Enter text") : "", React.createElement("label", undefined, "Amount"), React.createElement("label", undefined, "negative - expense, positive - income"), React.createElement("input", {
                       placeholder: "Enter amount...",
                       type: "number",
-                      value: String(price),
+                      value: price,
                       onChange: (function (e) {
-                          var updatedPrice = e.target.value;
-                          Curry._1(setPrice, (function (param) {
-                                  return updatedPrice;
-                                }));
+                          Curry._1(setPrice, e.target.value);
                         })
-                    }), React.createElement("button", {
+                    }), error && price <= String(0) ? React.createElement("div", {
+                        className: "error-label"
+                      }, "Enter amount") : "", React.createElement("button", {
                       type: "submit"
                     }, "Add transaction")));
 }

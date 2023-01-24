@@ -4,7 +4,7 @@ rule astj
   command = /Users/aditisingh/projects/ExpenseTracker-Rescript/expense-rescript/node_modules/rescript/darwinarm64/bsc.exe  -bs-v 10.0.1 -bs-jsx 3  -absname -bs-ast -o $out $i
 o src/App.ast : astj ../../src/App.res
 rule deps
-  command = /Users/aditisingh/projects/ExpenseTracker-Rescript/expense-rescript/node_modules/rescript/darwinarm64/bsb_helper.exe -hash b1d5c2e5e14c1e445bd1dd4bc73e9ffa $in
+  command = /Users/aditisingh/projects/ExpenseTracker-Rescript/expense-rescript/node_modules/rescript/darwinarm64/bsb_helper.exe -hash bacf4716fd10d1addb969a16cacc06df $in
   restat = 1
 o src/App.d : deps src/App.ast
 rule mij
@@ -18,9 +18,6 @@ o src/components/TotalBalance/TotalBalance.cmj src/components/TotalBalance/Total
 o src/components/NewTransaction/NewTransaction.ast : astj ../../src/components/NewTransaction/NewTransaction.res
 o src/components/NewTransaction/NewTransaction.d : deps src/components/NewTransaction/NewTransaction.ast
 o src/components/NewTransaction/NewTransaction.cmj src/components/NewTransaction/NewTransaction.cmi ../../src/components/NewTransaction/NewTransaction.bs.js : mij src/components/NewTransaction/NewTransaction.ast
-o src/components/History/History.ast : astj ../../src/components/History/History.res
-o src/components/History/History.d : deps src/components/History/History.ast
-o src/components/History/History.cmj src/components/History/History.cmi ../../src/components/History/History.bs.js : mij src/components/History/History.ast
 o src/components/History/HistoryList.ast : astj ../../src/components/History/HistoryList.res
 o src/components/History/HistoryList.d : deps src/components/History/HistoryList.ast
 o src/components/History/HistoryList.cmj src/components/History/HistoryList.cmi ../../src/components/History/HistoryList.bs.js : mij src/components/History/HistoryList.ast

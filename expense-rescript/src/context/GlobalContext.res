@@ -1,15 +1,21 @@
-@react.component
+@react.component @scope("JSON") @val
 type transaction = {id: int, text: string, price: int}
+external parseIntoMyData: string => array<transaction> = "parse"
 type state = array<transaction>
 let state = []
-// let state: array<transaction> = [{id: 0, text: "", price: 0}]
 type contextType = {
   transactions: array<transaction>,
   addTransactionHandler: transaction => unit,
 }
 let context = React.createContext({
-  transactions: [],
-  addTransactionHandler: _ => (),
+  let saveTransactions = Dom.Storage2.getItem(Dom.Storage2.sessionStorage, "saveTransactions")
+  {
+    transactions: switch saveTransactions {
+    | None => []
+    | Some(value: string) => parseIntoMyData(value)
+    },
+    addTransactionHandler: _ => (),
+  }
 })
 module ExpenseTrackerContext = {
   module Provider = {
@@ -25,10 +31,18 @@ module ExpenseTrackerContext = {
 type actions = AddTransaction(transaction)
 let reducer = (state, action) => {
   switch action {
-  | AddTransaction(transaction) => Js.Array2.concat(state, [transaction])
+  | AddTransaction(transaction) =>
+    Dom.Storage2.setItem(
+      Dom.Storage2.sessionStorage,
+      "saveTransactions",
+      switch Js.Json.stringifyAny((Js.Array2.concat(state, [transaction]): array<transaction>)) {
+      | None => ""
+      | Some(v) => v
+      },
+    )
+    Js.Array2.concat(state, [transaction])
   }
 }
-// Js.log(state)
 @react.component
 let make = (~children: React.element) => {
   let (state, dispatch) = React.useReducer(reducer, state)
