@@ -1,0 +1,38 @@
+.income-expense-form {
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  justify-content: space-around;
+  margin: 0rem 1rem;
+  display: flex;
+  background-color: white;
+}
+
+.middle-border {
+  border-left: 0.2rem solid grey;
+}
+
+.income {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.4rem 0;
+}
+
+.expense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.4rem 0;
+}
+
+.income-money {
+  margin: 0;
+  color: green;
+  font-weight: bold;
+}
+
+.expense-money {
+  margin: 0;
+  color: red;
+  font-weight: bold;
+}
