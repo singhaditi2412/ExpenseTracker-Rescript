@@ -33,24 +33,25 @@ function NewTransaction(Props) {
   var addTransactionHandler = match$4.addTransactionHandler;
   var onSubmit = function (e) {
     e.preventDefault();
-    if (text === "" && price === "") {
+    if (text === "" || price === "") {
       Curry._1(setError, (function (param) {
               return true;
             }));
+    } else {
+      Curry._1(setError, (function (param) {
+              return false;
+            }));
+      setId(function (prev) {
+            return prev + 1 | 0;
+          });
+      var price$1 = Belt_Int.fromString(price);
+      var price$2 = price$1 !== undefined ? price$1 : 0;
+      Curry._1(addTransactionHandler, {
+            id: id,
+            text: text,
+            price: price$2 | 0
+          });
     }
-    Curry._1(setError, (function (param) {
-            return false;
-          }));
-    setId(function (prev) {
-          return prev + 1 | 0;
-        });
-    var price$1 = Belt_Int.fromString(price);
-    var price$2 = price$1 !== undefined ? price$1 : 0;
-    Curry._1(addTransactionHandler, {
-          id: id,
-          text: text,
-          price: price$2 | 0
-        });
     Curry._1(setPrice, (function (param) {
             return "";
           }));

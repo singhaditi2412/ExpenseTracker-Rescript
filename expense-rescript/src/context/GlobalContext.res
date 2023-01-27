@@ -1,6 +1,6 @@
-@react.component @scope("JSON") @val
+@react.component
 type transaction = {id: int, text: string, price: int}
-external parseIntoMyData: string => array<transaction> = "parse"
+@val @scope("JSON") external parseIntoMyData: string => array<transaction> = "parse"
 type state = array<transaction>
 let state = []
 type contextType = {
@@ -40,6 +40,7 @@ let reducer = (state, action) => {
       | Some(v) => v
       },
     )
+
     Js.Array2.concat(state, [transaction])
   }
 }

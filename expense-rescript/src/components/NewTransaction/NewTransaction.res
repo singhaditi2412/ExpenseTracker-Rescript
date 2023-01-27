@@ -9,21 +9,22 @@ let make = () => {
 
   let onSubmit = e => {
     ReactEvent.Form.preventDefault(e)
-    if text == "" && price == "" {
+    if text == "" || price == "" {
       setError(_ => true)
+    } else {
+      setError(_ => false)
+      setId(.prev => prev + 1)
+      let price = Belt.Int.fromString(price)
+      let price = switch price {
+      | None => 0.
+      | Some(v) => Belt.Int.toFloat(v)
+      }
+      addTransactionHandler({
+        id,
+        text,
+        price: Belt.Float.toInt(price),
+      })
     }
-    setError(_ => false)
-    setId(.prev => prev + 1)
-    let price = Belt.Int.fromString(price)
-    let price = switch price {
-    | None => 0.
-    | Some(v) => Belt.Int.toFloat(v)
-    }
-    addTransactionHandler({
-      id,
-      text,
-      price: Belt.Float.toInt(price),
-    })
     setPrice(_ => "")
     setText(_ => "")
   }

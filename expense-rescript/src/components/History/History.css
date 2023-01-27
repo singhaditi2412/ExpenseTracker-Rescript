@@ -18,10 +18,10 @@
   margin: 0rem 2.2rem 0.2rem 0rem;
 }
 
-.history-list li.positive {
+.positive {
   border-right: 0.4rem solid green;
 }
 
-.history-list li.negative {
+.negative {
   border-right: 0.4rem solid red;
 }
