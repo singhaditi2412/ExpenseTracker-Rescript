@@ -1,0 +1,27 @@
+.history-heading {
+  padding: 1rem;
+}
+
+.history-list {
+  overflow: scroll;
+  height: 16vh;
+}
+
+.history-list li {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0rem 0.4rem 0rem 0.4rem;
+  margin: 0rem 2.2rem 0.2rem 0rem;
+}
+
+.positive {
+  border-right: 0.4rem solid green;
+}
+
+.negative {
+  border-right: 0.4rem solid red;
+}
