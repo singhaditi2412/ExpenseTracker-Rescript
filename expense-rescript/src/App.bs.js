@@ -3,20 +3,20 @@
 import * as React from "react";
 import * as HistoryList from "./components/History/HistoryList.bs.js";
 import * as TotalBalance from "./components/TotalBalance/TotalBalance.bs.js";
-import * as GlobalContext from "./context/GlobalContext.bs.js";
-import * as NewTransaction from "./components/NewTransaction/NewTransaction.bs.js";
-import * as IncomeExpenseForm from "./components/IncomeExpenseForm/IncomeExpenseForm.bs.js";
+import * as ExpenseContext from "./context/ExpenseContext.bs.js";
+import * as IncomeExpenseCmp from "./components/IncomeExpenseForm/IncomeExpenseCmp.bs.js";
+import * as AddNewTransactionCmp from "./components/AddNewTransaction/AddNewTransactionCmp.bs.js";
 
 import './App.css'
 ;
 
 function App(Props) {
-  return React.createElement(GlobalContext.make, {
+  return React.createElement(ExpenseContext.make, {
               children: React.createElement("div", {
                     className: "app"
                   }, React.createElement("h1", {
                         className: "heading"
-                      }, "Expense Tracker"), React.createElement(TotalBalance.make, {}), React.createElement(IncomeExpenseForm.make, {}), React.createElement(HistoryList.make, {}), React.createElement(NewTransaction.make, {}))
+                      }, "Expense Tracker"), React.createElement(TotalBalance.make, {}), React.createElement(IncomeExpenseCmp.make, {}), React.createElement(HistoryList.make, {}), React.createElement(AddNewTransactionCmp.make, {}))
             });
 }
 

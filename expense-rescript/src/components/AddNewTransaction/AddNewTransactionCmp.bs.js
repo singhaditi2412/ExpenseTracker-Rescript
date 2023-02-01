@@ -3,12 +3,12 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
 import * as Belt_Int from "rescript/lib/es6/belt_Int.js";
-import * as GlobalContext from "../../context/GlobalContext.bs.js";
+import * as ExpenseContext from "../../context/ExpenseContext.bs.js";
 
-import './NewTransaction.css'
+import './AddNewTransactionCmp.css'
 ;
 
-function NewTransaction(Props) {
+function AddNewTransactionCmp(Props) {
   var match = React.useState(function () {
         return "";
       });
@@ -20,17 +20,12 @@ function NewTransaction(Props) {
   var setPrice = match$1[1];
   var price = match$1[0];
   var match$2 = React.useState(function () {
-        return 1;
-      });
-  var setId = match$2[1];
-  var id = match$2[0];
-  var match$3 = React.useState(function () {
         return false;
       });
-  var setError = match$3[1];
-  var error = match$3[0];
-  var match$4 = React.useContext(GlobalContext.context);
-  var addTransactionHandler = match$4.addTransactionHandler;
+  var setError = match$2[1];
+  var error = match$2[0];
+  var match$3 = React.useContext(ExpenseContext.context);
+  var addTransaction = match$3.addTransaction;
   var onSubmit = function (e) {
     e.preventDefault();
     if (text === "" || price === "") {
@@ -41,13 +36,9 @@ function NewTransaction(Props) {
       Curry._1(setError, (function (param) {
               return false;
             }));
-      setId(function (prev) {
-            return prev + 1 | 0;
-          });
       var price$1 = Belt_Int.fromString(price);
       var price$2 = price$1 !== undefined ? price$1 : 0;
-      Curry._1(addTransactionHandler, {
-            id: id,
+      Curry._1(addTransaction, {
             text: text,
             price: price$2 | 0
           });
@@ -68,9 +59,8 @@ function NewTransaction(Props) {
                       type: "text",
                       value: text,
                       onChange: (function (e) {
-                          var updatedTransactionText = e.target.value;
                           Curry._1(setText, (function (param) {
-                                  return updatedTransactionText;
+                                  return e.target.value;
                                 }));
                         })
                     }), error && text <= String(0) ? React.createElement("div", {
@@ -89,7 +79,7 @@ function NewTransaction(Props) {
                     }, "Add transaction")));
 }
 
-var make = NewTransaction;
+var make = AddNewTransactionCmp;
 
 export {
   make ,

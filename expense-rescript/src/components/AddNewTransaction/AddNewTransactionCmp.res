@@ -1,11 +1,10 @@
-%%raw("import './NewTransaction.css'")
+%%raw("import './AddNewTransactionCmp.css'")
 @react.component
 let make = () => {
   let (text, setText) = React.useState(_ => "")
   let (price, setPrice) = React.useState(_ => "")
-  let (id, setId) = React.Uncurried.useState(_ => 1)
   let (error, setError) = React.useState(_ => false)
-  let {addTransactionHandler} = React.useContext(GlobalContext.context)
+  let {addTransaction} = React.useContext(ExpenseContext.context)
 
   let onSubmit = e => {
     ReactEvent.Form.preventDefault(e)
@@ -13,14 +12,12 @@ let make = () => {
       setError(_ => true)
     } else {
       setError(_ => false)
-      setId(.prev => prev + 1)
       let price = Belt.Int.fromString(price)
       let price = switch price {
       | None => 0.
       | Some(v) => Belt.Int.toFloat(v)
       }
-      addTransactionHandler({
-        id,
+      addTransaction({
         text,
         price: Belt.Float.toInt(price),
       })
@@ -39,8 +36,7 @@ let make = () => {
         type_="text"
         value={text}
         onChange={e => {
-          let updatedTransactionText = ReactEvent.Form.target(e)["value"]
-          setText(_ => updatedTransactionText)
+          setText(_ => ReactEvent.Form.target(e)["value"])
         }}
         placeholder="Enter text..."
       />
@@ -53,8 +49,7 @@ let make = () => {
         type_="number"
         value={price}
         onChange={e => {
-          let updatedPrice = ReactEvent.Form.target(e)["value"]
-          setPrice(updatedPrice)
+          setPrice(ReactEvent.Form.target(e)["value"])
         }}
         placeholder="Enter amount..."
       />
