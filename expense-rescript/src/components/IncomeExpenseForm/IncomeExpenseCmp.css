@@ -1,0 +1,31 @@
+.income-expense-cmp {
+  padding: 1rem;
+  justify-content: space-between;
+  display: flex;
+  background-color: white;
+}
+
+.income {
+  flex: 1;
+  text-align: center;
+  border-right: 0.2rem solid grey;
+}
+
+.expense {
+  flex: 1;
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.income-amount {
+  font-weight: bold;
+  color: green;
+}
+
+.expense-amount {
+  font-weight: bold;
+  color: red;
+}

@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
-import * as GlobalContext from "../../context/GlobalContext.bs.js";
+import * as ExpenseContext from "../../context/ExpenseContext.bs.js";
 
 import './History.css'
 ;
 
 function HistoryList(Props) {
-  var match = React.useContext(GlobalContext.context);
+  var match = React.useContext(ExpenseContext.context);
   return React.createElement("div", {
               className: "history"
             }, React.createElement("h3", {
@@ -16,9 +16,19 @@ function HistoryList(Props) {
                 }, "History", React.createElement("hr", undefined)), React.createElement("div", undefined, React.createElement("ul", {
                       className: "history-list"
                     }, Belt_Array.map(match.transactions, (function (transaction) {
+                            var amountColor = transaction.price > 0 ? "positive" : "negative";
                             return React.createElement("li", {
-                                        key: String(transaction.id)
-                                      }, React.createElement("p", undefined, transaction.text), React.createElement("p", undefined, "$", String(transaction.price)));
+                                        key: transaction.text,
+                                        className: "history-list-content"
+                                      }, React.createElement("p", {
+                                            className: "list-text"
+                                          }, transaction.text), React.createElement("div", {
+                                            className: "history-list-card-end"
+                                          }, React.createElement("p", {
+                                                className: "list-amount"
+                                              }, "\u20B9 " + String(transaction.price) + ""), React.createElement("div", {
+                                                className: amountColor
+                                              })));
                           })))));
 }
 

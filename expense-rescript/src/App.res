@@ -1,13 +1,13 @@
 %%raw("import './App.css'")
 @react.component
 let make = () => {
-  <GlobalContext>
+  <ExpenseContext>
     <div className="app">
       <h1 className="heading"> {"Expense Tracker"->React.string} </h1>
       <TotalBalance />
-      <IncomeExpenseForm />
+      <IncomeExpenseCmp />
       <HistoryList />
-      <NewTransaction />
+      <AddNewTransactionCmp />
     </div>
-  </GlobalContext>
+  </ExpenseContext>
 }
